@@ -29,3 +29,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Personal removals###
+derby.log
+quotes_db
