@@ -46,6 +46,7 @@ public class Quote {
   @NonNull
   @Column(length = 4096, nullable = false)
   private String text;
+
   @ManyToOne(fetch = FetchType.EAGER,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   @JoinColumn(name = "source_id")

@@ -52,6 +52,8 @@ public class SourceController {
     return sourceRepository.findById(id)
         .map((source) -> quoteRepository.getAllBySourceOrderByTextAsc(source))
         .get();
+
+
 }
 
 }
