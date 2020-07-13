@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.quotes.controller;
 
 import edu.cnm.deepdive.quotes.model.entity.Quote;
+import edu.cnm.deepdive.quotes.model.entity.Source;
 import edu.cnm.deepdive.quotes.model.entity.Tag;
 import edu.cnm.deepdive.quotes.service.QuoteRepository;
 import edu.cnm.deepdive.quotes.service.SourceRepository;
@@ -10,7 +11,6 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.ExposesResourceFor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,5 +80,16 @@ public class QuoteController {
       produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.TEXT_PLAIN_VALUE)
   public String putText(@PathVariable long id, @RequestBody String text){//How to modify individual properties of an object
     return null;
+  }
+
+  @PutMapping(value = "/{id:\\d+}/source",
+      consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public Quote putSource(@PathVariable long id, @RequestBody Source source) {
+    Quote quote = get(id);
+    if (source != null && source.getId() != null){
+      source = sourceRepository.findById(source.getId()).orElseThrow(NoSuchElementException::new);
+    }
+    quote.setSource(source);
+    return quoteRepository.save(quote);
   }
 }
