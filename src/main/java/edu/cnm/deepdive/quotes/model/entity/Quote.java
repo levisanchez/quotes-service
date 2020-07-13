@@ -70,7 +70,7 @@ public class Quote implements FlatQuote {
   private Source source;
 
   @ManyToOne(fetch = FetchType.EAGER,
-      cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+      cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
   @JoinColumn(name = "contributor_id")
   private User contributor;
 
